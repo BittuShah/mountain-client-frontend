@@ -21,6 +21,12 @@
   );
 }
 
+.ourLogo {
+  height: 150px;
+  width: 200px;
+  text-align: center;
+}
+
 /* .App-logo {
   height: 40vmin;
   pointer-events: none;

@@ -1,64 +1,48 @@
 import React, { Component } from "react";
 import axios from "axios";
+import LOGO from "../photos/LOGO.png";
 
 class ClientForm extends Component {
-  //   createClient = (e) => {
-  //     e.preventDefault();
-  //     console.log(e.target);
-  //   };
-
   submitData = (e) => {
     e.preventDefault();
-    console.log(
-      "shopName:",
-      e.target.elements.ShopName.value,
-      "shopEmail:",
-      e.target.elements.ShopEmail.value,
-      "shopNumber:",
-      e.target.elements.ShopMobileNo.value,
-      "shopAddress:",
-      e.target.elements.ShopAddress.value,
-      "shopComment:",
-      e.target.elements.ShopComment.value,
-      "appointmentDate:",
-      e.target.elements.ShopAppointmentDate.value,
-      "appointmentTime:",
-      e.target.elements.ShopAppointmentTime.value
-    );
-
-    // axios
-    //   .post(
-    //     "https://bluemountainproductions-client.herokuapp.com/api/contact",
-    //     {
-    //       shopName: e.target.elements.ShopName.value,
-    //       shopEmail: e.target.elements.ShopEmail.value,
-    //       shopNumber: e.target.elements.ShopMobileNo.value,
-    //       shopAddress: e.target.elements.ShopAddress.value,
-    //       shopComment: e.target.elements.ShopComment.value,
-    //       appointmentDate: e.target.elements.ShopAppointmentDate.value,
-    //       appointmentTime: e.target.elements.ShopAppointmentTime.value,
-    //     }
-    //   )
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
 
     axios
-      .get("https://bluemountainproductions-client.herokuapp.com/api/contact")
+      .post(
+        "https://bluemountainproductions-client.herokuapp.com/api/contact",
+        {
+          shopName: e.target.elements.ShopName.value,
+          shopEmail: e.target.elements.ShopEmail.value,
+          shopNumber: e.target.elements.ShopMobileNo.value,
+          shopAddress: e.target.elements.ShopAddress.value,
+          shopComment: e.target.elements.ShopComment.value,
+          appointmentDate: e.target.elements.ShopAppointmentDate.value,
+          appointmentTime: e.target.elements.ShopAppointmentTime.value,
+        }
+      )
       .then((response) => {
         console.log(response);
       })
       .catch((error) => {
         console.log(error);
       });
+
+    // axios
+    //   .get("https://bluemountainproductions-client.herokuapp.com/api/contact")
+    //   .then((response) => {
+    //     console.log(response);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   render() {
     return (
       <div className="container-fluid">
+        <div className="text-center mb-5 mt-3">
+          <img src={LOGO} alt="Logo" className="ourLogo" />
+        </div>
+
         <h3 className="formTitle">Client Infromation</h3>
 
         <hr className="titleLine" />
