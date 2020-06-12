@@ -1,53 +1,63 @@
 import React, { Component } from "react";
 import axios from "axios";
-import LOGO from "../photos/LOGO.png";
+import { toast } from "react-toastify";
 
 class ClientForm extends Component {
   submitData = (e) => {
     e.preventDefault();
 
+    const shopName = e.target.elements.ShopName.value;
+    e.target.elements.ShopName.value = "";
+
+    const shopEmail = e.target.elements.ShopEmail.value;
+    e.target.elements.ShopEmail.value = "";
+
+    const shopNumber = e.target.elements.ShopMobileNo.value;
+    e.target.elements.ShopMobileNo.value = "";
+
+    const shopAddress = e.target.elements.ShopAddress.value;
+    e.target.elements.ShopAddress.value = "";
+
+    const shopComment = e.target.elements.ShopComment.value;
+    e.target.elements.ShopComment.value = "";
+
+    const shopApDate = e.target.elements.ShopAppointmentDate.value;
+    e.target.elements.ShopAppointmentDate.value = "";
+
+    const shopApTime = e.target.elements.ShopAppointmentTime.value;
+    e.target.elements.ShopAppointmentTime.value = "";
+
+    const visitorName = e.target.elements.VisitorName.value;
+    e.target.elements.VisitorName.value = "";
+
     axios
       .post(
         "https://bluemountainproductions-client.herokuapp.com/api/contact",
         {
-          shopName: e.target.elements.ShopName.value,
-          shopEmail: e.target.elements.ShopEmail.value,
-          shopNumber: e.target.elements.ShopMobileNo.value,
-          shopAddress: e.target.elements.ShopAddress.value,
-          shopComment: e.target.elements.ShopComment.value,
-          appointmentDate: e.target.elements.ShopAppointmentDate.value,
-          appointmentTime: e.target.elements.ShopAppointmentTime.value,
+          shopName: shopName,
+          shopEmail: shopEmail,
+          shopNumber: shopNumber,
+          shopAddress: shopAddress,
+          shopComment: shopComment,
+          appointmentDate: shopApDate,
+          appointmentTime: shopApTime,
+          visitorName: visitorName,
         }
       )
       .then((response) => {
-        console.log(response);
+        toast.success("Data Sent!");
       })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    // axios
-    //   .get("https://bluemountainproductions-client.herokuapp.com/api/contact")
-    //   .then((response) => {
-    //     console.log(response);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+      .catch((error) => {});
   };
 
   render() {
     return (
       <div className="container-fluid">
-        <div className="text-center mb-5 mt-3">
-          <img src={LOGO} alt="Logo" className="ourLogo" />
-        </div>
-
         <h3 className="formTitle">Client Infromation</h3>
 
         <hr className="titleLine" />
 
-        <form onSubmit={this.submitData}>
+        <form onSubmit={this.submitData} className="formStyles">
           {/* Shop Name */}
           <div className="form-group mb-4">
             <label className="inputLabel" htmlFor="ShopName">
@@ -124,7 +134,7 @@ class ClientForm extends Component {
           {/* Shop Time */}
           <div className="form-group mb-4">
             <label className="inputLabel" htmlFor="ShopAppointmentTime">
-              Shop Appointment Date
+              Shop Appointment Time
             </label>
             <input
               type="text"
@@ -132,6 +142,19 @@ class ClientForm extends Component {
               id="ShopAppointmentTime"
               placeholder="Enter Shop Apointment Time"
             />
+          </div>
+
+          {/* Visitor Name */}
+
+          <div className="form-group">
+            <label htmlFor="VisitorName">Visitor's Name</label>
+            <select className="form-control" id="VisitorName">
+              <option value="Ashok Patel">Ashok Patel</option>
+              <option value="Jay Patel">Jay Patel</option>
+              <option value="Nisarg Patel">Nisarg Patel</option>
+              <option value="Pratik Panchal">Pratik Panchal</option>
+              <option value="Parshv Shah">Parshv Shah</option>
+            </select>
           </div>
 
           <div className="form-group" style={{ textAlign: "center" }}>

@@ -27,6 +27,17 @@
   text-align: center;
 }
 
+.tableStyle {
+  overflow-x: scroll;
+}
+
+@media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) {
+  .formStyles {
+    width: 700px;
+    margin: auto;
+  }
+}
+
 /* .App-logo {
   height: 40vmin;
   pointer-events: none;
