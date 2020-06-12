@@ -18,6 +18,7 @@ function App() {
         <Route path="/showdetails" component={Admin} />
         <Route path="/editdetails" component={EditDetails} />
         <Route path="/clientform" component={ClientForm} />
+        <Route path="/" exact component={ClientForm} />
       </Switch>
     </div>
   );
