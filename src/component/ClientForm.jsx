@@ -3,8 +3,14 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 class ClientForm extends Component {
+  state = {
+    isSubmitting: false,
+  };
+
   submitData = (e) => {
     e.preventDefault();
+
+    this.setState({ isSubmitting: true });
 
     const shopName = e.target.elements.ShopName.value;
     e.target.elements.ShopName.value = "";
@@ -46,11 +52,16 @@ class ClientForm extends Component {
       )
       .then((response) => {
         toast.success("Data Sent!");
+        this.setState({ isSubmitting: false });
       })
-      .catch((error) => {});
+      .catch((error) => {
+        this.setState({ isSubmitting: false });
+      });
   };
 
   render() {
+    let btnTxt = this.state.isSubmitting ? "Sending" : "Send";
+
     return (
       <div className="container-fluid">
         <h3 className="formTitle">Client Infromation</h3>
@@ -76,7 +87,7 @@ class ClientForm extends Component {
               Shop Email address
             </label>
             <input
-              type="email"
+              type="text"
               className="form-control"
               id="ShopEmail"
               placeholder="Enter Shop Email"
@@ -137,7 +148,7 @@ class ClientForm extends Component {
               Shop Appointment Time
             </label>
             <input
-              type="text"
+              type="time"
               className="form-control"
               id="ShopAppointmentTime"
               placeholder="Enter Shop Apointment Time"
@@ -149,7 +160,7 @@ class ClientForm extends Component {
           <div className="form-group">
             <label htmlFor="VisitorName">Visitor's Name</label>
             <select className="form-control" id="VisitorName">
-              <option value="Ashok Patel">Ashok Patel</option>
+              <option value="Sani Patel">Sani Patel</option>
               <option value="Jay Patel">Jay Patel</option>
               <option value="Nisarg Patel">Nisarg Patel</option>
               <option value="Pratik Panchal">Pratik Panchal</option>
@@ -158,8 +169,12 @@ class ClientForm extends Component {
           </div>
 
           <div className="form-group" style={{ textAlign: "center" }}>
-            <button type="submit" className="btn btn-primary">
-              Send
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={this.state.isSubmitting}
+            >
+              {btnTxt}
             </button>
           </div>
         </form>
