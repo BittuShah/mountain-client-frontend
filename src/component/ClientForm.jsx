@@ -36,6 +36,14 @@ class ClientForm extends Component {
     const visitorName = e.target.elements.VisitorName.value;
     e.target.elements.VisitorName.value = "";
 
+    const d = new Date();
+    const todayDate = d.toLocaleDateString();
+
+    // const endTimeValue = e.target.elements.toTime.value;
+    const breakEndTimeString = new Date(`${todayDate} ${shopApTime}`);
+
+    const endTime = breakEndTimeString.toLocaleTimeString();
+
     axios
       .post(
         "https://bluemountainproductions-client.herokuapp.com/api/contact",
@@ -46,7 +54,7 @@ class ClientForm extends Component {
           shopAddress: shopAddress,
           shopComment: shopComment,
           appointmentDate: shopApDate,
-          appointmentTime: shopApTime,
+          appointmentTime: endTime,
           visitorName: visitorName,
         }
       )
@@ -79,6 +87,7 @@ class ClientForm extends Component {
               className="form-control"
               id="ShopName"
               placeholder="Enter Shop Name"
+              required
             />
           </div>
           {/* Shop Email */}
@@ -115,6 +124,7 @@ class ClientForm extends Component {
               id="ShopAddress"
               placeholder="Enter Shop Address"
               rows="3"
+              required
             ></textarea>
           </div>
           {/* Shop Comment */}
